@@ -1,0 +1,33 @@
+# Function to add a directory to PATH if it exists and is not already in PATH
+add_to_path() {
+  # Check if the directory exists
+  if [ -d "$1" ]; then
+    # Check if the directory is already in PATH
+    case ":$PATH:" in
+      *":$1:"*) 
+        # If the directory is already in PATH, do nothing
+        ;;
+      *)
+        # If the directory is not in PATH, add it to PATH
+        PATH="$PATH:$1"
+        ;;
+    esac
+  fi
+}
+
+# /usr/local/bin
+add_to_path "/usr/local/bin"
+
+# Executable scripts
+add_to_path "$HOME/.scripts"
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+add_to_path "$BUN_INSTALL/bin"
+
+# Go
+export GOPATH="$HOME/go"
+export GOROOT="$(go env GOROOT)"
+add_to_path "$GOPATH/bin"
+
+export PATH

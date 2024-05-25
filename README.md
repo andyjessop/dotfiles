@@ -38,12 +38,12 @@ To update later on, just run that command again.
 
 ### Specify the `$PATH`
 
-If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as [detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-L26)) takes place.
+`~/.path` will be sourced along with the other files, before any feature testing (such as [detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-L26)) takes place.
 
-Here’s an example `~/.path` file that adds `/usr/local/bin` to the `$PATH`:
+Use the `add_to_path` function specified in `~/.path` to add directories to the `$PATH`. For example, to add `/usr/local/bin` to the `$PATH`, you would add the following line to `~/.path`:
 
 ```bash
-export PATH="/usr/local/bin:$PATH"
+add_to_path "/usr/local/bin"
 ```
 
 ### Add custom commands without creating a new fork
