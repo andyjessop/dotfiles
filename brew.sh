@@ -93,6 +93,7 @@ brew install pigz
 brew install pv
 brew install rename
 brew install rlwrap
+brew install smudge/smudge/nightlight
 brew install ssh-copy-id
 brew install tree
 brew install vbindiff
