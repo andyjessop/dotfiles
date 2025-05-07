@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Store the current directory
+ORIGINAL_DIR=$(pwd)
+
+# Change to the workers-sdk directory
+cd ~/dev/workers-sdk
+
+echo "On-Call Report - $(date '+%Y-%m-%d %H:%M:%S')"
+echo "================================================"
+
+echo -e "\n## Recently Updated PRs"
+echo "------------------------"
+gh pr list --limit 10 --json number,url,title,updatedAt --jq 'sort_by(.updatedAt) | reverse | .[] | "[\(.updatedAt)] \(.url): \(.title)"' | sed 's/T/ /; s/Z//'
+
+echo -e "\n## Issues Needing Author Response"
+echo "-----------------------------------"
+gh issue list --limit 1000 --json number,url,title,updatedAt,labels --jq 'map(select(any(.labels[]; .name == "needs reproduction" or .name == "awaiting reporter response" or .name == "awaiting dev response"))) | sort_by(.updatedAt) | reverse | .[] | "[\(.updatedAt)] \(.url): \(.title) - Labels: \(.labels | map(.name) | join(", "))"' | sed 's/T/ /; s/Z//'
+
+echo -e "\n## Approved PRs Ready for Merge"
+echo "---------------------------------"
+gh pr list --limit 1000 --json number,url,title,updatedAt,reviewDecision,isDraft,labels --search "review:approved -label:blocked -is:draft" --jq 'sort_by(.updatedAt) | reverse | .[] | "[\(.updatedAt)] \(.url): \(.title) - Labels: \(.labels | map(.name) | join(", "))"' | sed 's/T/ /; s/Z//'
+
+echo -e "\n## Issues Needing Cloudflare Response"
+echo "---------------------------------------"
+gh issue list --limit 1000 --json number,url,title,updatedAt,labels --jq 'map(select(any(.labels[]; .name == "awaiting Cloudflare response"))) | sort_by(.updatedAt) | reverse | .[] | "[\(.updatedAt)] \(.url): \(.title) - Labels: \(.labels | map(.name) | join(", "))"' | sed 's/T/ /; s/Z//'
+
+echo -e "\n## PRs Needing Cloudflare response"
+echo "------------------------------------"
+gh pr list --limit 1000 --json number,url,title,updatedAt,labels,state --search "label:\"awaiting Cloudflare response\"" --jq 'sort_by(.updatedAt) | reverse | .[] | "[\(.updatedAt)] \(.url): \(.title) - State: \(.state) - Labels: \(.labels | map(.name) | join(", "))"' | sed 's/T/ /; s/Z//'
+
+echo -e "\nEnd of Report"
+echo "================================================"
+
+# Change back to the original directory
+cd "$ORIGINAL_DIR"

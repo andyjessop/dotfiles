@@ -1,0 +1,4 @@
+. /Users/Andy/.local/share/cloudflare-warp-certs/config.sh
+
+export NPM_PUBLISH_TOKEN=set-in-bash-extras
+
