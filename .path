@@ -72,4 +72,7 @@ add_to_path "/Users/andy/Library/Python/3.9/bin"
 export JAVA_HOME="/usr/bin/java"
 add_to_path "$JAVA_HOME"
 
+# Tmuxifier
+add_to_path "$HOME/.tmuxifier/bin"
+
 export PATH

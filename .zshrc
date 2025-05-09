@@ -5,11 +5,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Replicates Bash behaviour: non‑login interactive shells source the profile
+eval "$(/usr/local/bin/brew shellenv)"
+export PATH="$HOME/bin:$PATH";
 
 [[ -o interactive ]] && source ~/.zprofile
+for file in ~/.{path,exports,aliases,functions,extra}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -62,5 +65,5 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 alias ls='ls --color'
 
-eval "$(fzf --zsh)"
+eval "$(tmuxifier init -)"
 eval "$(zoxide init --cmd cd zsh)"
