@@ -46,11 +46,6 @@ add_to_path "/opt/homebrew/bin"
 export BUN_INSTALL="$HOME/.bun"
 add_to_path "$BUN_INSTALL/bin"
 
-# Go
-export GOPATH="$HOME/go"
-export GOROOT="$(go env GOROOT)"
-add_to_path "$GOPATH/bin"
-
 # Nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

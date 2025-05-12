@@ -145,3 +145,6 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Clerk transcribe https://github.com/andyjessop/clerk
 alias ct="clerk transcribe /Volumes/DICTAPHONE/RECORD"
+
+# Python
+alias pip="pip3"
