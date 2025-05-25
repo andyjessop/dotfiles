@@ -85,4 +85,3 @@ vim.keymap.set("n", "<leader>p", '"_dP')
 -- yank into system register for pasting across apps
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+y')
